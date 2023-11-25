@@ -1,0 +1,162 @@
+﻿
+<style>
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        text-align: center;
+    }
+
+    th {
+        background-color: gray;
+        color: white;
+    }
+
+    td {
+        width: 150px;
+    }
+</style>
+
+<br />
+<h1>Test Razor</h1>
+@*multi statement block razor*@
+@{
+    ViewBag.Title = "Index";
+
+    var name = "Sophorn";
+    var age = 28;
+    var isMale = true;
+    var dob = DateTime.Now;
+
+    String address = "Battambang";
+    double weight = 55.5;
+
+    string qty = "5";
+    double price = 70;
+    double total = qty.AsInt() * price;
+
+    var txt = "";
+    if (DateTime.Now.Hour > 12)
+    {
+        txt = "Good Evening";
+    }
+    else
+    {
+        txt = "Good Morning";
+    }
+}
+
+@*sing statement block razor*@
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Male</th>
+        <th>Address</th>
+        <th>Total</th>
+        <th>Time</th>
+    </tr>
+    <tr>
+        <td>@name</td>
+        <td>@age</td>
+        <td>@isMale</td>
+        <td>@address</td>
+        <td>@total</td>
+        <td>@txt</td>
+    </tr>
+</table>
+<br />
+<hr />
+
+@*inline razor*@
+<h1>DateTime Object</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Day</th>
+            <th>Hour</th>
+            <th>Minute</th>
+            <th>Second</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@DateTime.Now.Day</td>
+            <td>@DateTime.Now.Hour</td>
+            <td>@DateTime.Now.Minute</td>
+            <td>@DateTime.Now.Second</td>
+        </tr>
+    </tbody>
+</table>
+<br />
+<hr />
+
+@*Loop*@
+<h1>For Loop</h1>
+<ul>
+    @for (int i = 1; i <= 20; i++)
+    {
+        <li>Line @i</li>
+    }
+</ul>
+<br />
+<hr />
+
+<h1>Foreach Loop</h1>
+<ol>
+    @foreach (var d in Request.ServerVariables)
+    {
+        <li>@d</li>
+    }
+</ol>
+<br />
+<hr />
+
+<h1>While Loop</h1>
+@{
+    var j = 0;
+    while (j < 5)
+    {
+        <p>@j</p>
+        j++;
+    }
+}
+<br />
+<hr />
+
+<h1>Loop with Arrays</h1>
+@{
+    string[] members = { "Lina", "Dara", "Kai" };
+    int position = Array.IndexOf(members, "Kai") + 1;
+    int len = members.Length;
+}
+@foreach (var named in members)
+{
+    <p>@named</p>
+}
+<p>Kai is at position @position</p>
+<p>Total Members: @len</p>
+<br />
+<hr />
+
+<h1>Switch Condition</h1>
+@{ 
+    var weekday = DateTime.Now.DayOfWeek;
+    var day = weekday.ToString();
+    var message = "";
+    switch (day)
+    {
+        case "Monday":
+            message = "This is first day of week";
+            break;
+        case "Thursday":
+            message = "Only one day before weekend";
+            break;
+        case "Friday":
+            message = "Tomorrow is weekend";
+            break;
+        default:
+            message = "Today is " + day;
+            break;
+    }
+}
+<p>@message</p>
